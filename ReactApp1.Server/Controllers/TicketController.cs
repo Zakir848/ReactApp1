@@ -54,8 +54,8 @@ namespace ReactApp1.Server.Controllers
 
             if(query.FromCityId.HasValue && query.ToCityId.HasValue)
             {
-                if(query.FromCityId.Value == query.ToCityId.Value)
-                    return BadRequest("Eyni seheri seche bilmezsiniz");
+                if (query.FromCityId.Value == query.ToCityId.Value)
+                    return BadRequest("Departure and destination cannot be the same.");
             }
 
             ticketQuery = query.Sort.ToLower() switch
@@ -104,16 +104,6 @@ namespace ReactApp1.Server.Controllers
 
             return Ok(result);
         }
-
-        //[HttpGet]
-        //public async Task<IActionResult> GetFlight(int fromCityId, int toCityId)
-        //{
-        //    //var fromCity = await _context.Tickets.FirstOrDefaultAsync(f => f.FromCity.Id == fromCityId);
-        //    //var toCity = await _context.Tickets.FirstOrDefaultAsync(f => f.ToCity.Id == fromCityId);
-
-
-
-        //}
 
         [HttpPost]
         public async Task<ActionResult<CreatedTicketDto>> CreateTicket([FromBody] CreatedTicketDto dto)
